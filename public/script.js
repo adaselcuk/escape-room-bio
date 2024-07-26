@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	  event.preventDefault();
   
 	  const formData = new FormData(form);
+	  const responseText = formData.get('response');
+  
 	  const response = await fetch('/submit', {
 		method: 'POST',
 		body: formData
@@ -15,6 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
 		const data = await fetch('/responses');
 		const responses = await data.json();
+  
+		const p = document.createElement('p');
+		p.textContent = responseText;
+		responsesDiv.appendChild(p);
   
 		responses.forEach(response => {
 		  const p = document.createElement('p');
