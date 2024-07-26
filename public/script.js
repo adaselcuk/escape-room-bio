@@ -29,6 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             alert('There was an error submitting your response. Please try again.');
         }
+
+		const responseText = formDataObj.response;
+		if (responseText.trim() !== "") {
+			const responseBox = document.createElement('div');
+			responseBox.className = 'response-box';
+			responseBox.textContent = responseText;
+			responsesDiv.appendChild(responseBox);
+			responsesDiv.style.display = 'grid';
+		}
     });
 
     async function updateResponses() {
@@ -42,13 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Fetched responses:', responses);
 
             responses.forEach(response => {
-                const p = document.createElement('p');
-                p.textContent = response.response || response.answer || "No response";
-                responsesDiv.appendChild(p);
-                console.log('Appended response:', p.textContent);
+				const responseBox = document.createElement('div');
+				responseBox.className = 'response-box';
+                responseBox.textContent = response.response || response.answer || "No response";
+                responsesDiv.appendChild(responseBox);
+                console.log('Appended response:', responseBox.textContent);
             });
 
-            responsesDiv.style.display = 'block';
+            responsesDiv.style.display = 'grid';
+			responsesDiv.style.gridTemplateColumns = 'repeat(2, 1fr)';
+			responsesDiv.style.gap = '10px';
         } catch (error) {
             console.error('Error fetching responses:', error);
         }
