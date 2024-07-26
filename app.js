@@ -19,24 +19,27 @@ const responseSchema = new mongoose.Schema({
 
 const Response = mongoose.model('Response', responseSchema);
 
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
 });
 
 app.post('/submit', async (req, res) => {
-  try {
-    const newResponse = new Response({ response: req.body.response });
-    await newResponse.save();
-    console.log('Response saved:', newResponse);
-    res.status(200).send();
-  } catch (error) {
-    console.error('Error saving response:', error);
-    res.status(500).send('Error saving response');
-  }
-});
+	console.log('Request body:', req.body); 
+	try {
+	  const newResponse = new Response({ response: req.body.response });
+	  await newResponse.save();
+	  console.log('Response saved:', newResponse);
+	  res.status(200).send();
+	} catch (error) {
+	  console.error('Error saving response:', error);
+	  res.status(500).send('Error saving response');
+	}
+  });
 
 app.get('/responses', async (req, res) => {
   try {

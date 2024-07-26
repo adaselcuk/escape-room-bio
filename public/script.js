@@ -6,10 +6,20 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         const formData = new FormData(form);
+        const formDataObj = {};
+
+        formData.forEach((value, key) => {
+            formDataObj[key] = value;
+        });
+
+        console.log('Form Data as JSON:', formDataObj);
 
         const response = await fetch('/submit', {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formDataObj)
         });
 
         if (response.ok) {
