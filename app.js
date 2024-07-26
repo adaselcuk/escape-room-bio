@@ -8,7 +8,9 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('Could not connect to MongoDB', err));
 
 const responseSchema = new mongoose.Schema({
   response: String,
@@ -25,14 +27,26 @@ app.get('/', (req, res) => {
 });
 
 app.post('/submit', async (req, res) => {
-  const newResponse = new Response({ response: req.body.response });
-  await newResponse.save();
-  res.status(200).send(); 
+  try {
+    const newResponse = new Response({ response: req.body.response });
+    await newResponse.save();
+    console.log('Response saved:', newResponse);
+    res.status(200).send();
+  } catch (error) {
+    console.error('Error saving response:', error);
+    res.status(500).send('Error saving response');
+  }
 });
 
 app.get('/responses', async (req, res) => {
-  const responses = await Response.find().sort({ date: -1 });
-  res.json(responses);
+  try {
+    const responses = await Response.find().sort({ date: -1 });
+    console.log('Responses fetched:', responses);
+    res.json(responses);
+  } catch (error) {
+    console.error('Error fetching responses:', error);
+    res.status(500).send('Error fetching responses');
+  }
 });
 
 app.listen(port, () => {
