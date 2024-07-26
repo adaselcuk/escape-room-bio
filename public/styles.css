@@ -90,3 +90,9 @@ body {
 	justify-content: center;
   }
   
+
+  h2 {
+	margin-left: 20px;
+	text-align: center;
+	grid-column: 1 / -1;
+  }
