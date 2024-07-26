@@ -1,6 +1,6 @@
 # UofT Biology Escape Room
 
-My friend asked for a favor to create a form for the Biology Escape Room she is designing and making.
+My friend asked for a favor to create a form for a Biology Escape Room she is designing and making.
 
 ## TO DO
 - [x] have users able to submit
