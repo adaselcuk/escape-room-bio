@@ -29,16 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             alert('There was an error submitting your response. Please try again.');
         }
+	});
 
-		const responseText = formDataObj.response;
-		if (responseText.trim() !== "") {
-			const responseBox = document.createElement('div');
-			responseBox.className = 'response-box';
-			responseBox.textContent = responseText;
-			responsesDiv.appendChild(responseBox);
-			responsesDiv.style.display = 'grid';
-		}
-    });
+	// 	const responseText = formDataObj.response;
+	// 	if (responseText.trim() !== "") {
+	// 		const responseBox = document.createElement('div');
+	// 		responseBox.className = 'response-box';
+	// 		responseBox.textContent = responseText;
+	// 		responsesDiv.appendChild(responseBox);
+	// 		responsesDiv.style.display = 'grid';
+	// 	}
+    // });
 
     async function updateResponses() {
         console.log('updateResponses called');
