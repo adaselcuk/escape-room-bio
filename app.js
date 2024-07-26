@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 app.post('/submit', async (req, res) => {
   const newResponse = new Response({ response: req.body.response });
   await newResponse.save();
-  res.redirect('/');
+  res.status(200).send(); 
 });
 
 app.get('/responses', async (req, res) => {
