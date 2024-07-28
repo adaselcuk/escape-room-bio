@@ -21,6 +21,22 @@ const Response = mongoose.model('Response', responseSchema);
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/styles.css', (req, res) => {
+  console.log('Serving styles.css');
+  res.sendFile(__dirname + '/public/styles.css');
+});
+
+app.use('/script.js', (req, res) => {
+  console.log('Serving script.js');
+  res.sendFile(__dirname + '/public/script.js');
+});
+
+app.use('/images/favicon.jpg', (req, res) => {
+  console.log('Serving favicon.jpg');
+  res.sendFile(__dirname + '/public/images/favicon.jpg');
+});
+
 app.use(express.static('public'));
 
 
